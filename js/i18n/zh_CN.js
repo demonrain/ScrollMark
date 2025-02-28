@@ -38,4 +38,9 @@ export default {
   backToParent: "返回上一级",
   feedback: "反馈问题",
   removeFromRecentBookmarks: "从常用书签中移除",
+  bookmarkBar: "书签栏",
+  otherBookmarks: "其他书签",
+  mobileBookmarks: "移动设备书签",
+  unnamedFolder: "未命名文件夹",
+  unnamedBookmark: "未命名书签",
 };

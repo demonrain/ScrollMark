@@ -38,4 +38,9 @@ export default {
   backToParent: "Back to parent",
   feedback: "Feedback",
   removeFromRecentBookmarks: "Remove from recent bookmarks",
+  bookmarkBar: "Bookmarks Bar",
+  otherBookmarks: "Other Bookmarks",
+  mobileBookmarks: "Mobile Bookmarks",
+  unnamedFolder: "Unnamed Folder",
+  unnamedBookmark: "Unnamed Bookmark",
 };

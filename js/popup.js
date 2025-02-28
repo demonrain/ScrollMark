@@ -107,10 +107,16 @@ document.addEventListener("DOMContentLoaded", function () {
         settings.language = newLanguage;
         saveSettingsQuietly();
         updateUIText();
-        // 重新渲染当前文件夹内容
-        renderFolderContent(currentFolder);
-        //重新渲染面包屑
-        updateBreadcrumb(currentFolder);
+
+        // 重新获取并处理书签数据以更新文件夹名称
+        chrome.bookmarks.getTree(function (bookmarkTreeNodes) {
+          processBookmarks(bookmarkTreeNodes);
+          // 重新渲染当前文件夹内容
+          renderFolderContent(currentFolder);
+          // 重新渲染面包屑
+          updateBreadcrumb(currentFolder);
+        });
+
         showNotification("languageChanged");
       }
     });
@@ -386,14 +392,28 @@ document.addEventListener("DOMContentLoaded", function () {
       chrome.storage.local.set({ markleSettings: settings }, function () {
         console.log("设置已重置（保留常用书签）");
         showNotification("settingsSaved");
-        // 重新渲染当前文件夹内容
-        renderFolderContent(currentFolder);
+
+        // 重新获取并处理书签数据以更新文件夹名称
+        chrome.bookmarks.getTree(function (bookmarkTreeNodes) {
+          processBookmarks(bookmarkTreeNodes);
+          // 重新渲染当前文件夹内容
+          renderFolderContent(currentFolder);
+          // 重新渲染面包屑
+          updateBreadcrumb(currentFolder);
+        });
       });
     } else {
       // 如果无法访问存储，使用本地存储
       localStorage.setItem("markleSettings", JSON.stringify(settings));
-      // 重新渲染当前文件夹内容
-      renderFolderContent(currentFolder);
+
+      // 重新获取并处理书签数据以更新文件夹名称
+      chrome.bookmarks.getTree(function (bookmarkTreeNodes) {
+        processBookmarks(bookmarkTreeNodes);
+        // 重新渲染当前文件夹内容
+        renderFolderContent(currentFolder);
+        // 重新渲染面包屑
+        updateBreadcrumb(currentFolder);
+      });
     }
 
     // 应用设置
@@ -457,15 +477,32 @@ document.addEventListener("DOMContentLoaded", function () {
         rootNode.children.forEach((child) => {
           // 处理书签栏和其他书签文件夹
           if (child.children) {
+            // 获取文件夹的翻译名称
+            let folderTitle = child.title;
+            switch (child.title) {
+              case "Bookmarks bar":
+              case "书签栏":
+                folderTitle = getI18nMessage("bookmarkBar");
+                break;
+              case "Other bookmarks":
+              case "其他书签":
+                folderTitle = getI18nMessage("otherBookmarks");
+                break;
+              case "Mobile bookmarks":
+              case "移动设备书签":
+                folderTitle = getI18nMessage("mobileBookmarks");
+                break;
+            }
+
             // 直接将书签栏和其他书签文件夹添加到根目录
             bookmarkData["0"].children.push({
               id: child.id,
-              title: child.title || "未命名文件夹",
+              title: folderTitle,
             });
             // 存储文件夹数据
             bookmarkData[child.id] = {
               id: child.id,
-              title: child.title || "未命名文件夹",
+              title: folderTitle,
               children: [],
               bookmarks: [],
               parentId: "0",
@@ -487,7 +524,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 创建文件夹对象
       const folder = {
         id: node.id,
-        title: node.title || "未命名文件夹",
+        title: node.title || getI18nMessage("unnamedFolder"),
         children: [],
         bookmarks: [],
         parentId: parentId,
@@ -497,7 +534,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (bookmarkData[parentId]) {
         bookmarkData[parentId].children.push({
           id: node.id,
-          title: node.title || "未命名文件夹",
+          title: node.title || getI18nMessage("unnamedFolder"),
         });
       }
 
@@ -513,7 +550,7 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (node.url) {
       const bookmark = {
         id: node.id,
-        title: node.title || "未命名书签",
+        title: node.title || getI18nMessage("unnamedBookmark"),
         url: node.url,
         favicon: getFaviconUrl(node.url),
       };
@@ -676,6 +713,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!folder) {
       console.error("找不到文件夹:", folderId);
       return;
+    }
+
+    // 如果是根目录，使用翻译后的标题
+    if (folderId === "0") {
+      folder.title = getI18nMessage("rootFolder");
     }
 
     // 渲染子文件夹
