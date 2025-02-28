@@ -1,6 +1,12 @@
 # ScrollMark 横趣书签 - Chrome 书签管理插件
 
-这是一个 Chrome 浏览器插件，提供更直观的书签管理体验。与浏览器默认书签栏不同，ScrollMark 提供了层级导航和搜索功能，让您更轻松地管理和访问书签。
+[![Release](https://img.shields.io/github/v/release/demonrain/ScrollMark)](https://github.com/demonrain/ScrollMark/releases)
+[![License](https://img.shields.io/github/license/demonrain/ScrollMark)](https://github.com/demonrain/ScrollMark/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/demonrain/ScrollMark)](https://github.com/demonrain/ScrollMark/stargazers)
+
+[English](./README_EN.md) | 简体中文
+
+> 一个简洁优雅的 Chrome 书签管理插件，提供更直观的书签管理体验。
 
 ## 功能特点
 
@@ -107,12 +113,27 @@
 └── images/        // 图标和资源
 ```
 
-## 作者
+## 联系作者
 
-- **开发者**：demonrain
-- **项目主页**：[https://github.com/demonrain/ScrollMark](https://github.com/demonrain/ScrollMark)
-- **问题反馈**：[Issues](https://github.com/demonrain/ScrollMark/issues)
+- **Email**: demonrain@vip.qq.com
+- **微信**: demonrain
+- **GitHub**: [@demonrain](https://github.com/demonrain)
+
+## 支持项目
+
+如果您觉得这个项目对您有帮助，欢迎打赏支持！
+
+<div align="center" style="display: flex; flex-direction: row; align-items: center;">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img src="./images/wechat_pay.png" alt="微信打赏" width="200"/>
+    <div>微信打赏</div>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: center; margin-left: 20px;">
+    <img src="./images/alipay.png" alt="支付宝打赏" width="200"/>
+    <div>支付宝打赏</div>
+  </div>
+</div>
 
 ## 许可证
 
-MIT License
+[MIT License](./LICENSE)
