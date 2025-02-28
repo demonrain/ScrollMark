@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "ScrollMark",
+    "description": "The name of the extension"
+  },
+  "extDescription": {
+    "message": "ScrollMark",
+    "description": "The description of the extension"
+  }
+}

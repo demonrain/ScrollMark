@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title data-i18n="extName"></title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <h1>ScrollMark</h1>
+          <span class="subtitle" data-i18n="extDescription"></span>
+          <span class="version">v1.0.0</span>
+        </div>
+        <div class="search-container">
+          <input
+            type="text"
+            id="search-input"
+            data-i18n-placeholder="searchPlaceholder"
+          />
+          <button id="search-button"><i class="fas fa-search"></i></button>
+          <button id="settings-button" class="settings-button">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
+      </header>
+
+      <div class="main-content">
+        <div class="sidebar">
+          <div class="breadcrumb" id="breadcrumb">
+            <span
+              class="breadcrumb-item active"
+              data-id="0"
+              data-i18n="rootFolder"
+            ></span>
+          </div>
+          <div class="folder-tree" id="folder-tree">
+            <!-- 文件夹树将在这里动态生成 -->
+          </div>
+          <div class="quick-links">
+            <div class="folder-item" data-id="recent">
+              <span class="folder-icon"><i class="fas fa-star"></i></span>
+              <span class="folder-name" data-i18n="recentBookmarks"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bookmark-content">
+          <div class="bookmark-list" id="bookmark-list">
+            <!-- 书签列表将在这里动态生成 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 设置面板 -->
+      <div class="settings-panel" id="settings-panel">
+        <div class="settings-header">
+          <h2 data-i18n="settings"></h2>
+          <button class="close-settings" id="close-settings">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="settings-group">
+          <h3 data-i18n="interfaceSettings"></h3>
+
+          <div class="settings-item">
+            <label for="column-layout" data-i18n="columnLayout"></label>
+            <select id="column-layout">
+              <option value="single-column" data-i18n="singleColumn"></option>
+              <option
+                value="multi-column"
+                selected
+                data-i18n="multiColumn"
+              ></option>
+              <option value="three-column" data-i18n="threeColumn"></option>
+            </select>
+          </div>
+
+          <div class="settings-item">
+            <label for="search-delay" data-i18n="searchDelay"></label>
+            <input
+              type="number"
+              id="search-delay"
+              min="0"
+              max="5"
+              step="0.1"
+              value="0.2"
+            />
+          </div>
+        </div>
+
+        <div class="settings-group">
+          <h3 data-i18n="bookmarkManagement"></h3>
+          <div class="settings-item">
+            <button
+              id="manage-bookmarks"
+              class="primary-button"
+              data-i18n="openBookmarkManager"
+            ></button>
+          </div>
+          <div class="settings-item">
+            <button
+              id="clear-recent"
+              class="danger-button"
+              data-i18n="clearRecentBookmarks"
+            ></button>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button
+            class="reset-settings"
+            id="reset-settings"
+            data-i18n="reset"
+          ></button>
+          <button
+            class="save-settings"
+            id="save-settings"
+            data-i18n="save"
+          ></button>
+        </div>
+
+        <div class="author-info">
+          <p>
+            <a
+              href="https://github.com/demonrain/ScrollMark/issues"
+              target="_blank"
+              data-i18n="feedback"
+            ></a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/popup.js" type="module"></script>
+  </body>
+</html>
