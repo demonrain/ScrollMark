@@ -351,6 +351,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 保存到存储
     chrome.storage.local.set({ markleSettings: settings }, function () {
+      // 应用新的设置
+      applySettings();
       showNotification("settingsSaved");
       toggleSettings(); // 关闭设置面板
     });
